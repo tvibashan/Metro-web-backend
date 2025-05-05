@@ -47,7 +47,7 @@ urlpatterns = [
         check_booking_qr_code_validation,
         name="check_booking_qr_code_validation",
     ),
-    # path('invalidate-qr-code/', invalidate_booking_qr_code, name='invalidate_booking_qr_code'),
+    path('invalidate-qr-code/', invalidate_booking_qr_code, name='invalidate_booking_qr_code'),
     path("dashboard-data/", dashboard_data, name="dashboard-data"),
     path("", include(router.urls)),
 ]
