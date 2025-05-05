@@ -1,0 +1,122 @@
+<head>
+    <style>
+        @page {
+            size: a4 portrait;
+            margin-top: 1.2cm;
+            margin-left: 0.8cm;
+            margin-right: 0.8cm;
+        }
+    </style>
+    </head>
+    <body>
+        <div style="padding-bottom:40px;">
+            <img style="height:auto; width:70pt; "  align="left" class='logo'src="{{ BASE_URL }}/static/pdf/logo.png" alt="Logo">
+        </div>
+        <table style="font-size: 10pt; width: 100%;  margin-bottom:20px; margin-top:20px; " >
+            <tr>
+                <td style="width: 50%; vertical-align: top; border: 1px solid #A9A9A9; ">
+                    <table>
+                        <tr>
+                            <td style="color: #00a6ed; padding-top:5pt; padding-left:5pt;"><strong>From</strong></td>
+                        </tr>                    
+                        <tr>
+                            <td style=" color: #636363; padding-left:5pt;"><strong>{{owner_info.brand_name}}</strong></td>
+                        </tr>
+                        <tr>
+                            <td style=" color: #636363; padding-left:5pt;">{{owner_info.email}}</td>
+                        </tr>                        
+                        <tr>
+                            <td style=" color: #636363; padding-left:5pt;">{{owner_info.phone}}</td>
+                        </tr>
+                        <tr>
+                            <td style=" color: #636363; padding-left:5pt; ">{{owner_info.secondary_phone}}</td>
+                        </tr>                        
+                    </table>
+                </td>
+                <td>
+                </td>    <td>
+                </td>    <td>
+                </td>
+                <td style="width: 50%; vertical-align: top; border: 1px solid #A9A9A9;">
+                    <table >
+                        <tr>
+                            <td style="color: #00a6ed;padding-top:5pt;padding-left:5pt;"><strong>Customer Details</strong></td>
+                        </tr>                        
+                        <tr>
+                            <td style=" color: #636363; padding-left:5pt; "><strong>To</strong></td>
+                        </tr>
+                        <tr>
+                            <td style=" color: #636363; padding-left:5pt; ">{{booking.user.email}}</td>
+                        </tr>                        
+                        <tr>
+                            <td style=" color: #636363; padding-left:5pt;  padding-bottom:5pt;">{{booking.user.user_profile.phone}}</td>
+                        </tr>                        
+                    </table>
+                </td>
+            </tr>
+        </table>
+        
+        <div style="margin-top:20px;margin-bottom:20px;">
+            <table  style="font-size:10pt;">
+                <tr>
+                    <td style="color: #636363;"><strong>Booking Id: </strong> {{booking.booking_id}}</td>
+                    <td style="color: #636363;"> <strong>Invoice Date : </strong>  {{ booking.created_at|date:"F d, Y" }}</td>
+                </tr>                   
+                <tr>
+                    <td style="color: #636363;"> <strong>Product:  </strong>{{booking.product_title}}</td>
+                    <td style="color: #636363;"><strong>Booking Date : </strong>  {{ booking.departure_date | date:"F d, Y" }}</td>
+                </tr>                                                                 
+            </table>
+        </div>
+        <table style="font-size: 10pt; border-collapse: collapse;">
+            <tr>
+                <td style="border-top: 1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9; padding: 5px; background-color: #f2f2f2;"><strong>Items</strong></td>
+                <td style="border-top: 1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9; text-align: center; padding: 5px; background-color: #f2f2f2;"><strong>Qty</strong></td>
+                <td style="border-top: 1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9; text-align: center; padding: 5px; background-color: #f2f2f2;"><strong>Option</strong></td>
+                <td style="border-top: 1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9; padding: 5px; background-color: #f2f2f2;"><strong>Rate</strong></td>
+                <td style="border-top: 1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9; padding: 5px; background-color: #f2f2f2;"><strong>Total</strong></td>
+            </tr>  
+            
+            {% for participant in booking.participants.all %}
+                <tr>
+                    <td style="color: #636363; border-top: 1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9; padding: 5px; {% if forloop.counter|divisibleby:2 %}background-color: #ededed;{% endif %}">{{ participant.participant_type  }}</td>
+                    <td style="color: #636363; text-align: center; border-top: 1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9; padding: 5px; {% if forloop.counter|divisibleby:2 %}background-color: #f2f2f2;{% endif %}">{{ participant.quantity }}</td>
+                    <td style="color: #636363; text-align: center; border-top: 1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9; padding: 5px; {% if forloop.counter|divisibleby:2 %}background-color: #f2f2f2;{% endif %}">{{ participant.option_name }}</td>
+                    <td style="color: #636363; border-top: 1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9; padding: 5px; {% if forloop.counter|divisibleby:2 %}background-color: #ededed;{% endif %}">{{ participant.cost_per_unit }}</td>
+                    <td style="color: #636363; border-top: 1px solid #A9A9A9; border-bottom: 1px solid #A9A9A9; padding: 5px; {% if forloop.counter|divisibleby:2 %}background-color: #f2f2f2;{% endif %}">EUR {{ participant.total_cost }}</td>
+                </tr>
+            {% endfor %}
+        
+        </table>
+        
+        <table style="font-size: 10pt; padding: 20px; margin-bottom: 10px; margin-top: 10px;">
+            <tr>
+                <td style="width: 50%;"></td>
+                <td style="width: 50%; background-color: #ededed; border-bottom: 1px solid #A9A9A9; padding: 5px;">Invoice Summary</td>
+            </tr>
+            <tr>
+                <td style="width: 50%;"></td> 
+                <td style="color: #636363; vertical-align: top;">
+                    <table style="font-size: 10pt;">
+                        <tr>
+                            <td style="color: #636363; border-bottom: 1px solid #A9A9A9; padding-top: 5px; padding-bottom: 5px;">Subtotal:</td>
+                            <td style="color: #636363; border-bottom: 1px solid #A9A9A9; padding-top: 5px; padding-bottom: 5px;">EUR {{booking.total_amount}}</td>
+                        </tr>
+                        <tr>
+                            <td style="color: #636363; border-bottom: 1px solid #A9A9A9; padding-top: 5px; padding-bottom: 5px;">Total:</td>
+                            <td style="color: #636363; border-bottom: 1px solid #A9A9A9; padding-top: 5px; padding-bottom: 5px;">EUR {{booking.total_amount}}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <div style="margin-top: 10pt; text-align: center;">
+            <img id="qr_code_image" src="{{ BASE_URL }}{{ booking.qr_code.url }}" style="height: 120px; width: 120px;"/>
+        </div>
+            <p align="center" style="margin-top:6pt"><strong>Thank you</strong></p> 
+            <p align="center" style="margin-top:6pt"><strong>Kids' Id card is mandatory</strong></p> 
+            <p align="center" style="margin-top:6pt"><strong>cuoretours</strong></p> 
+            <p align="center" style="margin-top: 6pt;"><strong>Developed By: <a target="_blank" href="https://featheruniverse.com">Feather IT</a></strong></p>
+        </body>
+    </html>

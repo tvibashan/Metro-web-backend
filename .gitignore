@@ -1,0 +1,65 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+
+
+
+
+# Migrations (optional, you can track them if needed)
+*/migrations/*.pyc
+*/migrations/*.pyo
+*/migrations/__pycache__/
+*/migrations/*.py, !*/migrations/__init__.py
+
+# Static and media files
+staticfiles/
+media/
+
+# Logs
+logs/
+*.log
+*.out
+*.err
+
+# IDE/editor specific files
+.vscode/
+.idea/
+*.sublime-workspace
+*.swp
+
+# Python virtualenv and package management
+pip-log.txt
+pip-delete-this-directory.txt
+Pipfile.lock
+
+# Coverage reports
+htmlcov/
+.coverage
+.coverage.*
+.cache
+
+# Celery beat schedule file
+celerybeat-schedule
+
+# Django cache
+*.cache
+
+# Docker-related files
+docker-compose.override.yml
+*.dockerfile
+
+# Node.js dependencies (if frontend exists)
+node_modules/
+yarn.lock
+package-lock.json
+
+# Deployment files
+*.pem
+*.crt
+*.key
+
