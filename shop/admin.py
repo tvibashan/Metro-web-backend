@@ -77,8 +77,8 @@ class WishlistAdmin(admin.ModelAdmin):
     def get_api_category(self, obj):
         return ", ".join([item.api_category for item in obj.wishitems.all()])
 
-    # def get_product_title(self, obj):
-    #     return ", ".join([item.product_title for item in obj.wishitems.all()])
+    def get_product_title(self, obj):
+        return ", ".join([item.product_title for item in obj.wishitems.all()])
 
 
 admin.site.register(Wishlist, WishlistAdmin)
